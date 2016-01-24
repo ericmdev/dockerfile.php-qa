@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="phpunit.xsd"
+         bootstrap="vendor/autoload.php"
          backupGlobals="false"
          verbose="true"
          colors="true"
@@ -13,7 +14,7 @@
 
     <testsuites>
         <testsuite name="Functional Test Suite">
-            <directory suffix=".php">./tests/functional/</directory> 
+            <directory suffix=".php">./test/functional/</directory> 
         </testsuite>
     </testsuites>
 
