@@ -1,0 +1,30 @@
+{
+    "name": "ericmdev/dockerfile-php-qa",
+    "description": "Example app for Dockerfile of PHP QA.",
+    "type": "application",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Eric Mugerwa",
+            "email":  "dev@ericmugerwa.com",
+            "homepage":  "http://www.ericmugerwa.com",
+            "role": "Developer"
+        }
+    ],
+    "license": "MIT",
+    "keywords": [
+        "Docker"
+    ],
+    "homepage": "https://github.com/ericmdev/dockerfile.php-qa",
+    "config": {
+        "use-include-path": true
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.1",
+        "phpunit/phpunit-selenium": "^2.0",
+        "firephp/firephp-core": "^0.4.0",
+        "facebook/webdriver": "^1.1"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
