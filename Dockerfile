@@ -69,7 +69,7 @@ RUN apt-key update && \
 	apt-get install -y --force-yes firefox
 
 # Adjust Firefox installation directory.
-RUN sudo chmod -R +x /opt/firefox/
+RUN chmod -R +x /opt/firefox/
 
 # Install Firefox dependencies.
 #
@@ -80,15 +80,15 @@ RUN sudo chmod -R +x /opt/firefox/
 #	- libgtk-3-0
 #	- libgtk2.0-0-dbg
 RUN apt-get update && \
-	apt-get install -y libdbus-glib-1-2
-	apt-get install -y libxrender-dev
-	apt-get install -y libxcomposite-dev
-	apt-get install -y libasound-dev
-	apt-get install -y libgtk-3-0
+	apt-get install -y libdbus-glib-1-2 && \
+	apt-get install -y libxrender-dev && \
+	apt-get install -y libxcomposite-dev && \
+	apt-get install -y libasound-dev && \
+	apt-get install -y libgtk-3-0 && \
 	apt-get install -y libgtk2.0-0-dbg
 
 # Download Selenium standalone server (2.49.1).
-RUN wget http://goo.gl/rQhaxb -P /opt/selenium-server-standalone-2.49.1.jar
+RUN wget -O selenium-server-standalone-2.49.1.jar http://goo.gl/rQhaxb -P /opt/
 
 # Install PHP 5.
 #
@@ -117,8 +117,8 @@ RUN apt-get update && \
 	apt-get install curl
 
 # Install PHP Composer.
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN composer --version
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+	composer --version
 
 # Install PHP Composer dependecies.
 #
@@ -145,10 +145,10 @@ RUN composer global require phpdocumentor/phpdocumentor && \
 # composer global require phing/phing
 
 # Install PHPUnit
-RUN wget https://phar.phpunit.de/phpunit.phar
-RUN chmod +x phpunit.phar
-RUN mv phpunit.phar /usr/local/bin/phpunit
-RUN phpunit --version
+RUN wget https://phar.phpunit.de/phpunit.phar && \
+	chmod +x phpunit.phar && \
+	mv phpunit.phar /usr/local/bin/phpunit && \
+	phpunit --version
 
 # Install Supervisor.
 # 
