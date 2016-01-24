@@ -68,8 +68,27 @@ RUN apt-key update && \
 	apt-get update && \
 	apt-get install -y --force-yes firefox
 
-# Download Selenium standalone server.
-RUN wget http://selenium.googlecode.com/files/selenium-server-standalone-2.35.0.jar -P /opt
+# Adjust Firefox installation directory.
+RUN chmod -R +x /opt/firefox/
+
+# Install Firefox dependencies.
+#
+# 	- libdbus-glib
+#	- libxrender-dev
+#	- libxcomposite-dev
+#	- libasound-dev
+#	- libgtk-3-0
+#	- libgtk2.0-0-dbg
+RUN apt-get update && \
+	apt-get install -y libdbus-glib-1-2 && \
+	apt-get install -y libxrender-dev && \
+	apt-get install -y libxcomposite-dev && \
+	apt-get install -y libasound-dev && \
+	apt-get install -y libgtk-3-0 && \
+	apt-get install -y libgtk2.0-0-dbg
+
+# Download Selenium standalone server (2.49.1).
+RUN wget -O selenium-server-standalone-2.49.1.jar http://goo.gl/rQhaxb -P /opt/
 
 # Install PHP 5.
 #
@@ -98,8 +117,8 @@ RUN apt-get update && \
 	apt-get install curl
 
 # Install PHP Composer.
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN composer --version
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+	composer --version
 
 # Install PHP Composer dependecies.
 #
@@ -119,10 +138,17 @@ RUN composer global require phpdocumentor/phpdocumentor && \
 	composer global require sebastian/phpcpd && \
 	composer global require phploc/phploc && \
 	composer global require phpmd/phpmd && \
-	composer global require squizlabs/php_codesniffer
+	composer global require squizlabs/php_codesniffer && \
+	composer global require facebook/webdriver
 
 # composer global require phpunit/dbunit
 # composer global require phing/phing
+
+# Install PHPUnit
+RUN wget https://phar.phpunit.de/phpunit.phar && \
+	chmod +x phpunit.phar && \
+	mv phpunit.phar /usr/local/bin/phpunit && \
+	phpunit --version
 
 # Install Supervisor.
 # 
