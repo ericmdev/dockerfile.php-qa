@@ -8,4 +8,4 @@
 docker run -d -P --name php-qa-container \
 						-v `pwd`:/srv/www/php-qa-app \
 						-v `pwd`/docker/volumes/var/log/nginx:/var/log/nginx/ \
-						ace-image
+						php-qa-image
