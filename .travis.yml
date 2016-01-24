@@ -6,6 +6,6 @@ services:
   - docker
 
 script:
-  - docker build -t php-qa -f ./Dockerfile .
-  - docker run -d --name=php_qa -p 8888:80 php-qa
+  - docker build -t php-qa-image -f ./Dockerfile .
+  - docker run -d --name=php-qa-container -p 8888:80 php-qa-image
   - docker ps -a
