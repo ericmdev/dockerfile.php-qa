@@ -87,8 +87,8 @@ RUN apt-get update && \
 	apt-get install -y libgtk-3-0
 	apt-get install -y libgtk2.0-0-dbg
 
-# Download Selenium standalone server.
-RUN wget http://selenium.googlecode.com/files/selenium-server-standalone-2.35.0.jar -P /opt
+# Download Selenium standalone server (2.49.1).
+RUN wget http://goo.gl/rQhaxb -P /opt/selenium-server-standalone-2.49.1.jar
 
 # Install PHP 5.
 #
