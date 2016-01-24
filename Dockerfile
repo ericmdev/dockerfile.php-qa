@@ -68,6 +68,25 @@ RUN apt-key update && \
 	apt-get update && \
 	apt-get install -y --force-yes firefox
 
+# Adjust Firefox installation directory.
+RUN sudo chmod -R +x /opt/firefox/
+
+# Install Firefox dependencies.
+#
+# 	- libdbus-glib
+#	- libxrender-dev
+#	- libxcomposite-dev
+#	- libasound-dev
+#	- libgtk-3-0
+#	- libgtk2.0-0-dbg
+RUN apt-get update && \
+	apt-get install -y libdbus-glib-1-2
+	apt-get install -y libxrender-dev
+	apt-get install -y libxcomposite-dev
+	apt-get install -y libasound-dev
+	apt-get install -y libgtk-3-0
+	apt-get install -y libgtk2.0-0-dbg
+
 # Download Selenium standalone server.
 RUN wget http://selenium.googlecode.com/files/selenium-server-standalone-2.35.0.jar -P /opt
 
@@ -119,10 +138,17 @@ RUN composer global require phpdocumentor/phpdocumentor && \
 	composer global require sebastian/phpcpd && \
 	composer global require phploc/phploc && \
 	composer global require phpmd/phpmd && \
-	composer global require squizlabs/php_codesniffer
+	composer global require squizlabs/php_codesniffer && \
+	composer global require facebook/webdriver
 
 # composer global require phpunit/dbunit
 # composer global require phing/phing
+
+# Install PHPUnit
+RUN wget https://phar.phpunit.de/phpunit.phar
+RUN chmod +x phpunit.phar
+RUN mv phpunit.phar /usr/local/bin/phpunit
+RUN phpunit --version
 
 # Install Supervisor.
 # 
