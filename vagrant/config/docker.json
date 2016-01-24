@@ -1,0 +1,12 @@
+{
+  "docker": {
+    "build_image": {
+    	":path": "/vagrant",
+    	":args": "-t php-qa"
+    },
+    "run": {
+    	":name": "php_qa",
+    	":image": "php-qa"
+    }
+  }
+}

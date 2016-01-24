@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Build image.
+docker build -t php-qa-image -f Dockerfile .

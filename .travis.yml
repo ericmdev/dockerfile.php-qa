@@ -1,0 +1,11 @@
+sudo: required
+
+language: ruby
+
+services:
+  - docker
+
+script:
+  - docker build -t php-qa-image -f ./Dockerfile .
+  - docker run -d --name=php-qa-container -p 8888:80 php-qa-image
+  - docker ps -a

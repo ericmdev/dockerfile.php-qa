@@ -1,0 +1,19 @@
+{
+  "nodes": {
+    "docker": { 
+      ":node": "Docker-PHP-QA",
+      ":box": "phusion/ubuntu-14.04-amd64",
+      ":box_url": "https://atlas.hashicorp.com/phusion/boxes/ubuntu-14.04-amd64",
+      ":ip": "192.168.33.77",
+      ":host": "docker.php-qa",
+      "ports": [
+        {
+          ":host": 2291,
+          ":guest": 22,
+          ":id": "ssh"
+        }
+      ],
+      ":memory": 512
+    }
+  }
+}
