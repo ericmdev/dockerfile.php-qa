@@ -1,98 +1,51 @@
-## Dockerfile: Debian - PHP-QA
+## Docker-Compose: Debian - PHP QA Hub
 
-[![Build Status](https://travis-ci.org/ericmdev/dockerfile.php-qa.svg?branch=master)](https://travis-ci.org/ericmdev/dockerfile.php-qa)
+[![Build Status](https://travis-ci.org/ericmdev/php-qa-hub.docker-compose.svg?branch=master)](https://travis-ci.org/ericmdev/php-qa-hub.docker-compose)
 
-**Dockerfile** of [Debian](https://www.debian.org/) [PHP](http://php.net/manual/en/book.fpm.php) QA tools.
+**Docker orchestration**  of [Debian](https://www.debian.org/) [PHP](http://php.net/manual/en/book.fpm.php) QA hub for continuous inspection of PHP projects:
 
-- CA Certificates
-- Curl
-- Firefox
-- Git
-- Java
-- Nano
-- NGINX
-- OpenSSL
-- PHP 5.6
-- PHP Composer
-    + phpunit
-    + phpunit-selenium
-    + phpdocumentor
-    + phpcpd
-    + phploc
-    + phpmd
-    + php_codesniffer
-- Selenium 2.49.1
-- Supervisor
-- Wget
-- X virtual framebuffer
+- phpdocumentor
+- phpcpd
+- phploc
+- phpmd
+- pdepend
+- php_codesniffer
+- phpunit
+- selenium
+- sonarqube
 
 *Requirements*
 - [Docker](https://www.docker.com/) 
 
-*Base Docker Image*
-- [re6exp/debian-jessie-oracle-jdk-8](https://github.com/re6exp/debian-jessie-oracle-jdk-8)
-
-*Processes*
-- nginx 
-- php-fpm (5.6.14)
-- java
-- selenium
-- firefox
-
-*Docker Pull Command*
-- `docker pull ericmdev/php-qa`
-
-### Development
-
-    $ docker build -t php-qa-image -f ./Dockerfile .
-
-Creates the image `php-qa-image`.
+*Docker Images*
+- [ericmdev/srv-www](https://hub.docker.com/r/ericmdev/srv-www/)
+- [ericmdev/php-qa-tools](https://hub.docker.com/r/ericmdev/php-qa-tools/)
+- [ericmdev/selenium](https://hub.docker.com/r/ericmdev/selenium/)
+- [sonarqube:5.1](https://hub.docker.com/_/sonarqube/)
 
 ### Usage
 
-    $ docker run -d --name=php-qa-container -p 8080:80 php-qa-image
+#### Native Docker
 
-Runs the container `php-qa-container`.
+Builds the services in `docker-compose.yml`.
 
-### Selenium
+    $ docker-compose build
 
-*Create Xvfb display:*
+Create and start the services in `docker-compose.yml`.
 
-    # Get the path to Xvfb.
-    whereis Xvfb
-    # Now create a screen.
-    /usr/bin/Xvfb :1 -screen 0 1024x768x24 &
-    # Export display.
-    export DISPLAY=:1
+    $ docker-compose up -d
+    $ docker-compose ps
 
-*Start Selenium server:*
+Now you can dig into the containers:
 
-    java -jar /opt/selenium-server-standalone-2.49.1.jar -port 4444
+    $ docker exec -it <name> bash
 
-*Shutdown Selenium server:*
+#### Vagrant
 
-    http://localhost:4444/selenium-server/driver/?cmd=shutDownSeleniumServer
+    $ vagrant up
 
-Expected output:
+*See `config/vagrant/` for configuration options.
 
-    INFO - Launching a standalone Selenium Server
-    INFO - Java: Oracle Corporation 25.40-b25
-    INFO - OS: Linux 4.1.13-boot2docker amd64
-    INFO - v2.49.1, with Core v2.49.1. Built from revision 7203e46
-    INFO - Driver provider org.openqa.selenium.ie.InternetExplorerDriver registration is skipped:
-    registration capabilities Capabilities [{ensureCleanSession=true, browserName=internet explorer, version=, platform=WINDOWS}] does not match the current platform LINUX
-    INFO - Driver provider org.openqa.selenium.edge.EdgeDriver registration is skipped:
-    registration capabilities Capabilities [{browserName=MicrosoftEdge, version=, platform=WINDOWS}] does not match the current platform LINUX
-    INFO - Driver class not found: com.opera.core.systems.OperaDriver
-    INFO - Driver provider com.opera.core.systems.OperaDriver is not registered
-    INFO - Driver provider org.openqa.selenium.safari.SafariDriver registration is skipped:
-    registration capabilities Capabilities [{browserName=safari, version=, platform=MAC}] does not match the current platform LINUX
-    INFO - RemoteWebDriver instances should connect to: http://127.0.0.1:4444/wd/hub
-    INFO - Selenium Server is up and running
-
-### PHPUnit Functional Tests
-
-For the example application.
-
-    cd /ex-app/
-    phpunit --configuration phpunit.xml --testsuite "Functional Test Suite"
+*Plugins*
+- [vagrant-docker-compose](https://github.com/leighmcculloch/vagrant-docker-compose)
+    - `$ vagrant plugin install vagrant-docker-compose`

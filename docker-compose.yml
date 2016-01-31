@@ -1,0 +1,25 @@
+srv_www:
+    image: ericmdev/srv-www
+    volumes:
+        - ./webapp:/srv/www
+    tty: true
+
+php_qa_tools:
+    image: ericmdev/php-qa-tools
+    volumes_from:
+        - srv_www
+
+selenium:
+    image: ericmdev/selenium
+    links:
+        - php_qa_tools
+    expose:
+        - 4444:4444
+
+sonarqube:
+    image: sonarqube:5.1
+    volumes_from:
+        - srv_www
+    expose:
+        - 9000:9000
+        - 9092:9092

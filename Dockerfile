@@ -164,6 +164,9 @@ VOLUME ["/srv/www", "/etc/nginx", "/var/log/nginx/", "/var/cache/nginx"]
 # Listen on http https ports.
 EXPOSE 80 443
 
+# Add scripts.
+ADD ./bin/ /bin
+
 # Configure executable.
 ENTRYPOINT ["/usr/bin/supervisord"]
 

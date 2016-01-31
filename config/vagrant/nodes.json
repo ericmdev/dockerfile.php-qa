@@ -1,11 +1,11 @@
 {
   "nodes": {
     "docker": { 
-      ":node": "Docker-PHP-QA",
+      ":node": "Docker-PHP-QA-Hub",
       ":box": "phusion/ubuntu-14.04-amd64",
       ":box_url": "https://atlas.hashicorp.com/phusion/boxes/ubuntu-14.04-amd64",
       ":ip": "192.168.33.77",
-      ":host": "docker.php-qa",
+      ":host": "php-qa-hub.docker-host",
       "ports": [
         {
           ":host": 2291,
