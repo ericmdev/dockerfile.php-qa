@@ -1,6 +1,6 @@
 {
-    "name": "ericmdev/dockerfile-php-qa",
-    "description": "Example app for Dockerfile of PHP QA.",
+    "name": "ericmdev/php-qa-hub-example",
+    "description": "Example app for Docker PHP QA Hub.",
     "type": "application",
     "version": "1.0.0",
     "authors": [
@@ -15,7 +15,7 @@
     "keywords": [
         "Docker"
     ],
-    "homepage": "https://github.com/ericmdev/dockerfile.php-qa",
+    "homepage": "https://github.com/ericmdev/php-qa-hub.docker-compose",
     "config": {
         "use-include-path": true
     },
